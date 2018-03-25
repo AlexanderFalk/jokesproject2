@@ -7,7 +7,7 @@ public class Joke {
    private final String joke;
    private final String reference;
 
-  public Joke(String joke,String reference) {
+  public Joke(String joke, String reference) {
     this.joke = joke;
     this.reference = reference;
   }

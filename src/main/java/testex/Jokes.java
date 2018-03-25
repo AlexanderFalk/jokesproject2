@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class Jokes {
 
-  List<Joke> jokes = new ArrayList();
-  String timeZoneString;
+  private List<Joke> jokes = new ArrayList();
+  private String timeZoneString;
 
   void addJoke(Joke joke) {
     jokes.add(joke);
