@@ -10,11 +10,18 @@ Then I rewrote the DateFormatter.java class as well. I made it more managable wi
 * Explain basically about JUnit, Hamcrest, Mockito and Jacoco, and what problems they solve for testers  
   
   **JUnit**  
+  JUnit is a testing framework for Java, which helps the developer executing the theory behind Unit testing. JUnit emphasizes the idea of "test first, then code", which can help to reveal bugs before they become critical. 
   **Hamcrest**  
+  Hamcrest is a framework for writing matcher objects allowing 'match' rules to be defined declaratively. There are a number of situations where matchers are invaluable, such as UI validation, or data filtering, but it is in the area of writing flexible tests that matchers are most commonly used. Hamcrest gives more freedom to the developer and it also helps testing more specific units, such as the content of a list and if certain elements exists. 
   **Mockito**  
+  Mockito is a popular mock framework which can be used in conjunction with JUnit. Mockito allows you to create and configure mock objects. Using Mockito simplifies the development of tests for classes with external dependencies significantly. The usage of this is helpful, when you want to test a certain functionality, but that functionality might be bound to other functionalities, which dependent on the outcome, so we want to "mock" the object to believe it executed a functionality, but it really didn't. A side note to mocking: don't mock everything. 
   **Jacoco**  
-  
-* Demonstrate how you used Mockito to mock away external Dependencies
+  JaCoCo is an open-source toolkit for measuring and reporting Java code coverage.  
+    
+  These tools help the developer by providing a lot of useful functionality to test whether certain units works as intended; if things are inserted correctly and objects are constructed as expected; a functionality returns the correct value(s); and to help reveal bugs early in the phase of development. This is very important to keep the cost down throughout the whole project. By during testing first and checking different ways of interacting with the program, we can keep a good development speed going, because we know we satisfy the requirements.   
+    
+* Demonstrate how you used Mockito to mock away external Dependencies  
+As stated above, I splitted the different joke methods up into their own classes, which implements an interface, and it provides a functionality called: __getJoke()__. This method has been mocked away and I'm mocking each object of the different classes (ex.: TambalJoke.java) and then I'm trying to see whether it returns as expected. These tests can be found in the __FetcherTest.java__ class.     
 * Demonstrate how/where you did state-based testing and how/where you did behaviour based testing
 
 * Explain about Coverage Criterias, using the results presented by running Jacoco (or a similar tool) against you final test code.
