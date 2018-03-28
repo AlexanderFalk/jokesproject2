@@ -10,11 +10,14 @@ Then I rewrote the DateFormatter.java class as well. I made it more managable wi
 * Explain basically about JUnit, Hamcrest, Mockito and Jacoco, and what problems they solve for testers  
   
   **JUnit**  
-  JUnit is a testing framework for Java, which helps the developer executing the theory behind Unit testing. JUnit emphasizes the idea of "test first, then code", which can help to reveal bugs before they become critical. 
+  JUnit is a testing framework for Java, which helps the developer executing the theory behind Unit testing. JUnit emphasizes the idea of "test first, then code", which can help to reveal bugs before they become critical.  
+  
   **Hamcrest**  
-  Hamcrest is a framework for writing matcher objects allowing 'match' rules to be defined declaratively. There are a number of situations where matchers are invaluable, such as UI validation, or data filtering, but it is in the area of writing flexible tests that matchers are most commonly used. Hamcrest gives more freedom to the developer and it also helps testing more specific units, such as the content of a list and if certain elements exists. 
+  Hamcrest is a framework for writing matcher objects allowing 'match' rules to be defined declaratively. There are a number of situations where matchers are invaluable, such as UI validation, or data filtering, but it is in the area of writing flexible tests that matchers are most commonly used. Hamcrest gives more freedom to the developer and it also helps testing more specific units, such as the content of a list and if certain elements exists.  
+  
   **Mockito**  
-  Mockito is a popular mock framework which can be used in conjunction with JUnit. Mockito allows you to create and configure mock objects. Using Mockito simplifies the development of tests for classes with external dependencies significantly. The usage of this is helpful, when you want to test a certain functionality, but that functionality might be bound to other functionalities, which dependent on the outcome, so we want to "mock" the object to believe it executed a functionality, but it really didn't. A side note to mocking: don't mock everything. 
+  Mockito is a popular mock framework which can be used in conjunction with JUnit. Mockito allows you to create and configure mock objects. Using Mockito simplifies the development of tests for classes with external dependencies significantly. The usage of this is helpful, when you want to test a certain functionality, but that functionality might be bound to other functionalities, which dependent on the outcome, so we want to "mock" the object to believe it executed a functionality, but it really didn't. A side note to mocking: don't mock everything.  
+  
   **Jacoco**  
   JaCoCo is an open-source toolkit for measuring and reporting Java code coverage.  
     
