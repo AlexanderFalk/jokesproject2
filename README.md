@@ -1,4 +1,7 @@
 # Project 2 - Midterm Assignment - Jokes
+
+**PLEASE BE AWARE THAT TAMBAL & EDU JOKES ARE NO LONGER WORKING. THE APIS ARE NO LONGER AVAILABLE**
+
 * Explain the necessary steps you did to make the code testable, and some of the patterns involved in this step  
   
 To make this code testable I had to take the advantage of the Factory Pattern, which gives us the flexible and the reuseable object-oriendted software. This means that objects are easier to reuse, test, implement, or change.  
@@ -24,8 +27,57 @@ Then I rewrote the DateFormatter.java class as well. I made it more managable wi
   These tools help the developer by providing a lot of useful functionality to test whether certain units works as intended; if things are inserted correctly and objects are constructed as expected; a functionality returns the correct value(s); and to help reveal bugs early in the phase of development. This is very important to keep the cost down throughout the whole project. By during testing first and checking different ways of interacting with the program, we can keep a good development speed going, because we know we satisfy the requirements.   
     
 * Demonstrate how you used Mockito to mock away external Dependencies  
-As stated above, I splitted the different joke methods up into their own classes, which implements an interface, and it provides a functionality called: __getJoke()__. This method has been mocked away and I'm mocking each object of the different classes (ex.: TambalJoke.java) and then I'm trying to see whether it returns as expected. These tests can be found in the __FetcherTest.java__ class.     
-* Demonstrate how/where you did state-based testing and how/where you did behaviour based testing
+As stated above, I splitted the different joke methods up into their own classes, which implements an interface, and it provides a functionality called: __getJoke()__. This method has been mocked away and I'm mocking each object of the different classes (ex.: TambalJoke.java) and then simulating the real object to see whether it returns as expected. These tests can be found in the __FetcherTest.java__ class.  
+The TambalJoke.java class has been mocked as shown below:  
+```
+    @Mock
+    private TambalJoke tambalJoke;
+```
+...  
+```
+    @Test
+    public void testGetTambalJokesMocking() {
+        System.out.println("##### START TESTGETTAMBALJOKESMOCKING TESTING #####");
+        String tJoke = "Dati ang gamot sa sakit na LOVEnat ay KISSpirin at YAKAPsul ngayon hindi na... " +
+                "biogeSEX na pwedeng gawin kahit walang laman ang tyan dahil magkakalaman din yan..oh pano? INGAT!";
+
+        Mockito.when(tambalJoke.getJoke()).thenReturn(new Joke(tJoke, "http://tambal.azurewebsites.net/joke/random"));
+        mockData.add(tambalJoke);
+        assertThat(tambalJoke.getJoke().getReference(), equalTo("http://tambal.azurewebsites.net/joke/random"));
+        Mockito.verify(mockData).add(tambalJoke);
+        Mockito.when(mockData.size()).thenReturn(1);
+        assertThat(mockData.size(), equalTo(1));
+    }
+```
+* Demonstrate how/where you did state-based testing and how/where you did behaviour based testing  
+
+I used State-based testing in those tests, where there have been no mocks used. As an example is the __testGetJokes()__, which just tests whether the jokes is getting added to the list of jokes. This changes the state of the new list, that we create under test.  
+```
+    @Test
+    public void testGetJokes() {
+        System.out.println("##### START GETJOKES TESTING #####\n");
+        List<IJokeFetcher> data = fetcher.getJokes("eduprog,chucknorris,mom,tambal");
+
+        assertThat(data.get(0), instanceOf(EduJoke.class));
+        //System.out.println(data.get(0).getJoke().getJoke());
+        assertThat(data.get(1), instanceOf(ChuckNorrisJoke.class));
+        System.out.println("Chuck Norris Joke: " + data.get(1).getJoke().getJoke());
+        assertThat(data.get(2), instanceOf(MomJoke.class));
+        System.out.println("Yo Momma Joke: " + data.get(2).getJoke().getJoke());
+        assertThat(data.get(3), instanceOf(TambalJoke.class));
+        //System.out.println(data.get(3).getJoke().getJoke());
+
+        assertThat(data, hasSize(4));
+    }
+```
+
+The list will get its state changed, if everything is working as intended.  
+  
+The behaviour-based testing is testing with mocks, where we check if the mocked object made the correct calls. We do this check by telling the mock what to expect during setup and asking the mock to verify itself during verification. We have demonstrated this above with the __TambalJoke__ testing class, which shows the object denoted with @Mock, and then the test itself, which takes the functionality being tested and telling it that: "When you are getting called; I want you to return this". Then we verify it and if it goes through, then we give it a thumbs up and smile :).  
 
 * Explain about Coverage Criterias, using the results presented by running Jacoco (or a similar tool) against you final test code.
+I must admit here, that I couldn't get the JaCoCo to work with my project. I may have done something wrong, but it wouldn't create the report as I expected it to do. Though the Coverage Criterias should be < 80%, this would've been fullfilled, if it wasn't for two API's being down. This has been stated with capital, bold letters at the top of this document.  
+
 * Explain/demonstrate what was required to make this project use, JUnit (Hamcrest), Mockito and Jacoco
+To make this project use all the above tools, I had to nearly re-develop the whole project, since it was lousy built for testing. It was tightly coupled and I couldn't check the different jokes APIs directly. A lot of things were moved to its own classes and interfaces. Some methods were made more transparent and dependency injection was permitted. As an example were the __DateFormatter__ class, which had the method: __getFormattedDate__. This method had only one parameter, which was a timezone that you could enter. Here was a Date-object added as a parameter, so the user of the class was in control of the Date object themselves.  
+JUnit, Mockito, and Hamcrest were all already added as dependencies in Maven, so these were easy to get going with. JaCoCo had to be added as a dependency and the some settigns had to be added to the pom.xml maven file. This did though not work and I hadn't been able to figure out why. The plugin settings were quite complex and the documentation for JaCoCo
