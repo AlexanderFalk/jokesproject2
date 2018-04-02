@@ -14,6 +14,7 @@ public class EduJoke implements IJokeFetcher {
             String reference = res.path("http://jokes-plaul.rhcloud.com/api/joke");
             return new Joke(joke,reference);
         }catch(Exception e){
+            e.printStackTrace();
             return null;
         }
     }

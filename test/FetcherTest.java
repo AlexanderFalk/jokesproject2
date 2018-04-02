@@ -83,6 +83,24 @@ public class FetcherTest {
         assertThat(data, containsInAnyOrder(fetcher.getAvailableTypes().toArray(new String[data.size()])));
     }
 
+    // Due to jokes-plaul.rhcloud.com is no longer available, this will be null as of 29th of March and forward
+    @Test
+    public void testGetEduJokesNoMocking() {
+        System.out.println("##### START TESTGETEDUJOKESNOMOCKING TESTING #####");
+        EduJoke ej = new EduJoke();
+        assertThat(ej.getJoke(), nullValue());
+        //assertThat(joke.getJoke(), blankOrNullString());
+    }
+
+    // Due to jokes-plaul.rhcloud.com is no longer available, this will be null as of 29th of March and forward
+    @Test
+    public void testGetTambalJokesNoMocking() {
+        System.out.println("##### START TESTGETTAMBALJOKESNOMOCKING TESTING #####");
+        TambalJoke tambalJoke = new TambalJoke();
+        assertThat(tambalJoke.getJoke(), nullValue());
+        //assertThat(joke.getJoke(), blankOrNullString());
+    }
+
     // **MOCKING WILL BE BELOW HERE - PLEASE CHECK IT OUT, BECAUSE IT IS DAMN COOL ;-)**
     /**********************************************************************************/
 
@@ -99,6 +117,8 @@ public class FetcherTest {
         Mockito.when(mockData.size()).thenReturn(1);
         assertThat(mockData.size(), equalTo(1));
     }
+
+
 
     @Test
     public void testGetChuckNorrisJokesMocking() {
